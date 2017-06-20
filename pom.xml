@@ -26,6 +26,12 @@
     </dependency>
 
     <dependency>
+      <artifactId>LCommModule</artifactId>
+      <groupId>com.lqipai</groupId>
+      <version>1.0</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.baidu</groupId>
       <artifactId>jprotobuf</artifactId>
       <version>1.2.9</version>
