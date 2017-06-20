@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="GamePlatform:war">
+    <output-path>$PROJECT_DIR$/target</output-path>
+    <root id="archive" name="GamePlatform.war">
+      <element id="artifact" artifact-name="GamePlatform:war exploded" />
+    </root>
+  </artifact>
+</component>
