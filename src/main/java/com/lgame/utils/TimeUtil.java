@@ -1,10 +1,13 @@
 package com.lgame.utils;
 
+import com.lgame.util.encry.MD5Tool;
+import org.junit.Test;
+
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-
+import static com.lgame.util.load.demo.xml.Root.Type.Test;
 
 
 /**
@@ -56,8 +59,6 @@ public class TimeUtil {
 	}
 	/**
 	 * util.Date型日期转化指定格式的字符串型日期
-	 * @param   Date    Date
-	 * @param   p_format String
 	 * 格式1:"yyyy-MM-dd"
 	 * 格式2:"yyyy-MM-dd hh:mm:ss EE"
 	 * 格式3:"yyyy年MM月dd日 hh:mm:ss EE"
@@ -96,5 +97,11 @@ public class TimeUtil {
 		}else{
 			return false;
 		}
+	}
+
+	@org.junit.Test
+	public void go(){
+
+		System.out.println(MD5Tool.GetMD5Code("lxh19870718"));
 	}
 }

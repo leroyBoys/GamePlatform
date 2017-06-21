@@ -15,7 +15,7 @@ import java.io.IOException;
 public class JsonConverter extends MappingJackson2HttpMessageConverter {
     @Override
     protected void writeInternal(Object object, HttpOutputMessage outputMessage) throws IOException, HttpMessageNotWritableException {
-        SystemLogger.info(this.getClass(),"======JsonConverter==writeInternal="+ JsonUtil.getJsonFromBean(object));
+        SystemLogger.info(this.getClass(),"sendMsg:"+ JsonUtil.getJsonFromBean(object));
         super.writeInternal(object, outputMessage);
     }
 }

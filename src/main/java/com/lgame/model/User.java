@@ -1,6 +1,5 @@
 package com.lgame.model;
 
-import com.module.db.UserInfo;
 import com.mysql.impl.DbFactory;
 
 import java.io.Serializable;
@@ -14,7 +13,6 @@ public class User extends DbFactory implements Serializable {
     private int id;
 	private String name;
 	private String password;
-	private String mail;
 	private short group;
 	private int card;
 	private byte userStatus;
@@ -44,14 +42,6 @@ public class User extends DbFactory implements Serializable {
 
 	public void setPassword(String password) {
 		this.password = password;
-	}
-
-	public String getMail() {
-		return mail;
-	}
-
-	public void setMail(String mail) {
-		this.mail = mail;
 	}
 
 	public short getGroup() {
@@ -91,6 +81,7 @@ public class User extends DbFactory implements Serializable {
 		User user = createNew();
 		user.setId(rs.getInt("id"));
 		user.setGroup(rs.getShort("group"));
+		user.setPassword(rs.getString("password"));
 		user.setCreateTime(rs.getDate("create_time"));
 		user.setUserStatus(rs.getByte("user_status"));
 		return user;

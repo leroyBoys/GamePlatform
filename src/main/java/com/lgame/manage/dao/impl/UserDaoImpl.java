@@ -51,6 +51,14 @@ public class UserDaoImpl extends BaseDao implements UserDao{
 
     @Override
     public int insertUser(User user) {
+        try {
+            int id = this.insert(jdbcTemplate,"INSERT INTO USER(`name`,`password`,`group`,create_time)VALUES(?,?,?,?,?)",
+                    user.getName(),user.getPassword(),user.getGroup(),user.getCreateTime());
+            return id;
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        } finally {
+        }
         return 0;
     }
 

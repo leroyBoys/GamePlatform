@@ -37,7 +37,7 @@ public class RepeateRequsetFilter implements Filter {
         long startTime = System.currentTimeMillis();
         String uri = request.getServletPath();
 
-        boolean isLog =uri.startsWith("/gm");
+        boolean isLog =uri.startsWith("/gm")||uri.startsWith("/static");
         if(!isLog){
             SystemLogger.info(this.getClass(),"receive:"+uri+" parameter:"+ JsonUtil.getJsonFromBean(request.getParameterMap()));
         }

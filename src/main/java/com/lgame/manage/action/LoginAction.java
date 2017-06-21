@@ -35,11 +35,12 @@ public class LoginAction {
 			session.setAttribute("msg","用户名或密码不能为空");
 		}
 		try {
-			if(loginService.login(user)){
+			user = loginService.login(user);
+			if(user != null){
 				session.setAttribute("cur_user", user);
 				return "redirect:main";
 			}else{
-				session.setAttribute("msg","用户名不存在");
+				session.setAttribute("msg","用户名不存在或者密码错误");
 			}
 		} catch (AppException e) {
 			session.setAttribute("msg",e.getMessage());

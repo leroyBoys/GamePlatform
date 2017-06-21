@@ -3,7 +3,6 @@ package com.lgame.manage.cache;
 import com.lgame.codec.BdResponse;
 import com.lgame.codec.RequestDecoderLocal;
 import com.lgame.codec.ResponseEncoderLocal;
-import com.lgame.model.net.CmdMsg;
 import com.lsocket.core.ClientServer;
 
 import java.util.HashMap;

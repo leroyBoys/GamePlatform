@@ -14,6 +14,6 @@ public interface LoginService {
 	 * @return
 	 * @throws AppException
 	 */
-	public boolean login(User user) throws AppException;
+	public User login(User user) throws AppException;
 
 }

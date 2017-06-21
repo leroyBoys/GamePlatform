@@ -4,6 +4,7 @@ import com.lgame.manage.service.LoginService;
 import com.lgame.manage.service.ServerService;
 import com.lgame.manage.service.UserService;
 import com.lgame.model.User;
+import com.lgame.util.encry.MD5Tool;
 import com.lgame.utils.AppException;
 import com.lgame.utils.PropertiesUtils;
 import com.lgame.utils.StringUtil;
@@ -17,25 +18,12 @@ public class LoginServiceImpl implements LoginService {
 	@Autowired
 	private UserService userService;
 
-	public boolean login(User user) throws AppException {
-		String userList = PropertiesUtils.getValue("user");
-		String name;
-		String pwd;
-		for(String userStr : userList.split(",")){
-			if(StringUtil.isEmpty(userStr)){
-				continue;
-			}
-			name = userStr.split(":")[0].substring(1);
-			pwd = userStr.split(":")[1].substring(0,userStr.split(":")[1].length()-1);
-			if(name.equals(user.getName())){
-				if(pwd.equals(user.getPassword())){
-					return true;
-				}else{
-					throw new AppException("error");
-				}
-			}
+	public User login(User user) throws AppException {
+		User u = userService.getUser(user.getName());
+		if(u == null || !MD5Tool.GetMD5Code(user.getPassword()).equals(u.getPassword())){
+			return null;
 		}
-		return false;
+		return u;
 	}
 
 }
