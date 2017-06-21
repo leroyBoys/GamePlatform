@@ -16,13 +16,4 @@ public interface LoginService {
 	 */
 	public boolean login(User user) throws AppException;
 
-	public SEVersionCheck check(REVersionCheck vcd);
-
-	public Object login(RELogin vcd);
-
-	public Object login_three(RELoginThird vcd);
-
-	public Object regedister(REregister re);
-
-	public Object changePwd(HttpSession session, REChangePwd vcd);
 }

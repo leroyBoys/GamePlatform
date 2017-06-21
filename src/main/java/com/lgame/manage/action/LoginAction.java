@@ -25,7 +25,6 @@ public class LoginAction {
 	 * 登陆后台处理
 	 * @param user
 	 * @param request
-	 * @param response
 	 * @return
 	 */
 	@RequestMapping(value={"/logined"})

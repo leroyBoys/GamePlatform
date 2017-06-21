@@ -2,6 +2,7 @@ package com.lgame.manage.dao.impl;
 
 import com.lgame.base.dao.BaseDao;
 import com.lgame.manage.dao.UserDao;
+import com.lgame.model.User;
 import com.lgame.util.comm.StringTool;
 import com.module.db.UserDev;
 import com.module.db.UserFrom;
@@ -25,84 +26,15 @@ public class UserDaoImpl extends BaseDao implements UserDao{
     private JdbcTemplate jdbcTemplate;
 
     @Override
-    public UserInfo getUserInfo(String name) {
-        return getUserInfoFromDb("SELECT * FROM user_info WHERE user_name ='"+name+"'");
-    }
-
-    @Override
-    public boolean updateUserInfoStatus(int uid, String userName, String pwd, String invite_code) {
-        return this.executeUpdate(jdbcTemplate,"CALL SET_USERINFO_AGAIN (?,?,?,?)",  uid, userName, pwd, invite_code);
-    }
-
-    @Override
-    public int findDevId(String device_mc, String udid) {
+    public User getUser(String name) {
         try {
-            Object obj = this.executesOneResult(jdbcTemplate,"SELECT id FROM user_device WHERE device_mac = ?  AND udid = ? ",device_mc,udid);
-            if(obj == null){
-                return 0;
-            }
-
-            return (int) obj;
-        } catch (Exception ex) {
-        } finally {
-        }
-        return 0;
-    }
-
-    @Override
-    public UserDev insertDev(UserDev dev) {
-        try {
-           int id =  this.insert(jdbcTemplate,"INSERT INTO user_device(device_info,device_name,os_id,device_mac,udid,create_date)VALUES(?,?,?,?,?,?)",
-                    dev.getDeviceInfo(),
-                    dev.getDeviceName(),
-                    dev.getOsId(),
-                    dev.getDeviceMac(),
-                    dev.getUdid(),
-                    dev.getCreateDate());
-            dev.setId(id);
-            return dev;
-        } catch (Exception ex) {
-        } finally {
-        }
-        return null;
-    }
-
-    @Override
-    public UserInfo insertUserInfo(UserInfo info) {
-        try {
-            int id = this.insert(jdbcTemplate,"INSERT INTO user_info(device_id,user_from_type,user_from_id,user_name,user_pwd,role,invite_code,user_status,status_endtime,create_date)"
-                    + "			VALUES(?,?,?,?,?,?,?,?,?,?)", info.getDeviceId(),
-                    info.getUserFromType(),
-                    info.getUserFromId(),
-                    info.getUserName(),
-                    info.getUserPwd(),
-                    info.getRole(),
-                    info.getInviteCode(),
-                    info.getUserStatus(),
-                    info.getStatusEndTime(),
-                    info.getCreateDate());
-            info.setId(id);
-            return info;
-        } catch (Exception ex) {
-        } finally {
-        }
-        return null;
-    }
-
-    @Override
-    public UserInfo getUserInfo(int id) {
-        return getUserInfoFromDb("SELECT * FROM user_info WHERE id="+id);
-    }
-
-    private UserInfo getUserInfoFromDb(String sql) {
-        try {
-            return jdbcTemplate.execute(sql, new PreparedStatementCallback<UserInfo>() {
+            return jdbcTemplate.execute("select * from `user` where `name` = '"+name.trim()+"'", new PreparedStatementCallback<User>() {
                 @Override
-                public UserInfo doInPreparedStatement(PreparedStatement cs) throws SQLException, DataAccessException {
+                public User doInPreparedStatement(PreparedStatement cs) throws SQLException, DataAccessException {
                     ResultSet rs = cs.executeQuery();
                     if(rs.next()){
                         try {
-                            return UserInfo.instance.create(rs);
+                            return User.instance.create(rs);
                         } catch (Exception e) {
                             e.printStackTrace();
                         }
@@ -118,20 +50,11 @@ public class UserDaoImpl extends BaseDao implements UserDao{
     }
 
     @Override
-    public void updateUserInfoLastDev(int uid, int devId) {
-        this.executeUpdate(jdbcTemplate,"UPDATE user_info SET device_id = ?,is_online=0  WHERE id = ?",devId,uid);
+    public int insertUser(User user) {
+        return 0;
     }
 
-    @Override
-    public UserInfo getUserInfoByUserFormId(int formId) {
-        return getUserInfoFromDb("SELECT * FROM user_info WHERE user_from_id = '"+formId+"'");
-    }
-
-    @Override
-    public boolean updatepwd(int id, String newPwd) {
-        return this.executeUpdate(jdbcTemplate,"UPDATE user_info SET user_pwd = ? WHERE id = ?",newPwd,id);
-    }
-
+/*
     @Override
     public int getUserFrom(String userSrc) {
         try {
@@ -159,5 +82,5 @@ public class UserDaoImpl extends BaseDao implements UserDao{
         } finally {
         }
         return 0;
-    }
+    }*/
 }

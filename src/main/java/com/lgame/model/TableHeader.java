@@ -1,7 +1,6 @@
 package com.lgame.model;
 
 /**
- * ��ͷ��Ϣ
  * @author lxh
  *
  */
