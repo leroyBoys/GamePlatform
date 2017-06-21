@@ -28,7 +28,7 @@ public class GateServerCache {
     public void start() {
         System.out.println("=====>"+redisIp);
         System.out.println("=====>"+mysqlip);
-        initServerManager();
+      //  initServerManager();
     }
 
     private void initServerManager(){

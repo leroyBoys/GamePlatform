@@ -59,11 +59,11 @@ public class GameServerAction {
 	public Map<String,Object> versionCheck( String data , HttpServletRequest request, HttpSession session){
 		REVersionCheck checkdata = (REVersionCheck) JsonUtil.getBeanFromJson(data,REVersionCheck.class);
 
-		SEVersionCheck check = loginService.check(checkdata);
+		/*SEVersionCheck check = loginService.check(checkdata);
 		if(check == null){
 			return this.getReturnMapData("cant find data from srcId:"+checkdata.getSrcId()+"  gameId"+checkdata.getGameId(),null);
-		}
-		return this.getReturnMapData(null,check);
+		}*/
+		return this.getReturnMapData(null,checkdata);
 	}
 
 	/**

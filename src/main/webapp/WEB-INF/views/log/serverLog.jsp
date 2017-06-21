@@ -10,7 +10,7 @@
 <%@ include file="../common/base.jsp" %>
 <HTML xmlns="http://www.w3.org/1999/xhtml">
 <HEAD>
-	<TITLE>北京飞羽游戏管理系统登陆</TITLE>
+	<TITLE>${ShowTitleName}</TITLE>
 </HEAD>
 <link rel="stylesheet" type="text/css" href="${basePath }/static/tool/easyUI/themes/default/easyui.css"/>
 <link rel="stylesheet" type="text/css" href="${basePath }/static/tool/easyUI/themes/icon.css"/>

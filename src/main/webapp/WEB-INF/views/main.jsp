@@ -17,7 +17,7 @@
 <script type="text/javascript" src="${basePath }/static/js/addMoney.js"></script>
 	<script type="text/javascript" src="${basePath }/static/js/gm.js"></script>
 	<script type="text/javascript" src="${basePath }/static/js/logUpdate.js" charset="GBK"></script>
-<title>北京飞羽游戏管理系统</title>
+<title>${ShowTitleName}</title>
 <script type="text/javascript">
   addStaticDb();
 </script>
@@ -36,7 +36,7 @@
 			<div id="tabs" class="easyui-tabs" fit="true" border="false" plain="true">
 <!-- 			    <table id="grid_id"></table> -->
 <!-- 			     <div id="gridPager"></div> -->
-				<div title="欢迎进入飞羽游戏管理系统" href="${basePath }/default"></div>
+				<div title="${ShowTitleName}" href="${basePath }/default"></div>
 			</div>
 		</div>
 
