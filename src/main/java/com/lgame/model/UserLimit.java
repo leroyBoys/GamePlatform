@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.sql.ResultSet;
 
 public class UserLimit extends DbFactory implements Serializable {
-    public static UserLimit instance;
+    public static UserLimit instance = new UserLimit();
     private int id;
     private int uid;
 	private int urlId;

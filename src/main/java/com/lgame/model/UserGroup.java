@@ -10,7 +10,7 @@ import java.sql.ResultSet;
  * 2017/6/21.
  */
 public class UserGroup extends DbFactory implements Serializable {
-    public static UserGroup instance;
+    public static UserGroup instance = new UserGroup();
     private int id;
     private String name;
     private String content;

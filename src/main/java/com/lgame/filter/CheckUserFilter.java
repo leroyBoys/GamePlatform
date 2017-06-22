@@ -24,10 +24,7 @@ public class CheckUserFilter  implements Filter {
     private static String LOGIN_URL = "/login";
 
     public void init(FilterConfig filterConfig) throws ServletException {
-        commonList.add("/static/css");
-        commonList.add("/static/js");
-        commonList.add("/static/images");
-        commonList.add("/static/tool");
+        commonList.add("/static");
         LOGIN_URL = filterConfig.getServletContext().getContextPath()+LOGIN_URL;
     }
 
@@ -46,18 +43,23 @@ public class CheckUserFilter  implements Filter {
             return;
         }
 
-        String url = uri.substring(0,uri.lastIndexOf("/"));
-        boolean isWhite = uri.length() <= 1?false: commonList.contains(url);//白名单
+        String firstUrlChar = uri.substring(0,Math.min(uri.length(),7));
+        boolean isWhite = uri.length() <= 1?false: commonList.contains(firstUrlChar);//白名单
 
-        if(!isWhite && session.getAttribute("cur_user")==null){
+        if(isWhite){
+            chain.doFilter(req, resp);
+            return;
+        }
+        User user = (User) session.getAttribute("cur_user");
+
+        if(user==null){
             request.setAttribute("msg", "请先登录");
             response.sendRedirect(LOGIN_URL);//跳转到登陆页
             return;
         }
 
-        System.out.println("===>url:"+url);
-        User user = (User) session.getAttribute("cur_user");
-        if(!commonMenu.contains(url) && !user.hasUrl(url)){
+        System.out.println("===>uri:"+uri);
+        if(!commonMenu.contains(uri) && !user.hasUrl(uri)){
             request.setAttribute("msg", "权限错误");
             return;
         }

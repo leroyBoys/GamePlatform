@@ -9,7 +9,7 @@ import java.util.HashSet;
 import java.util.Set;
 
 public class User extends DbFactory implements Serializable {
-    public static User instance;
+    public static User instance = new User();
     private int id;
 	private String name;
 	private String password;
@@ -17,7 +17,6 @@ public class User extends DbFactory implements Serializable {
 	private int card;
 	private byte userStatus;
 	private Date createTime;
-
 
 	private Set<String> urls = new HashSet<>();
 	public String getName() {

@@ -12,7 +12,7 @@ import java.util.Set;
  * 2017/6/22.
  */
 public class GroupLimit extends DbFactory implements Serializable {
-    public static GroupLimit instance;
+    public static GroupLimit instance = new GroupLimit();
     private int id;
     private int groupId;
     private int urlId;

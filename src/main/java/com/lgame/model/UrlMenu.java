@@ -10,7 +10,7 @@ import java.util.List;
  * Created by Administrator on 2017/6/21.
  */
 public class UrlMenu extends DbFactory implements Serializable {
-    public static UrlMenu instance;
+    public static UrlMenu instance = new UrlMenu();
     private int id;
     private String url;
     private String urlName;

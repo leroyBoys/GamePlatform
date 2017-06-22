@@ -15,8 +15,6 @@
 <script type="text/javascript" src="${basePath }/static/js/main.js"></script>
 <script type="text/javascript" src="${basePath }/static/js/dynamic.js"></script>
 <script type="text/javascript" src="${basePath }/static/js/addMoney.js"></script>
-	<script type="text/javascript" src="${basePath }/static/js/gm.js"></script>
-	<script type="text/javascript" src="${basePath }/static/js/logUpdate.js" charset="GBK"></script>
 <title>${ShowTitleName}</title>
 <script type="text/javascript">
   addStaticDb();

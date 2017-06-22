@@ -24,15 +24,7 @@ public class GateServerCache {
     private UserService userService;
     @Autowired
     private UserRedis userRedis;
-
-    @Value("${redis.host}")
-    private String redisIp;
-    @Value("${url}")
-    private String mysqlip;
-
     public void start() {
-      /*  System.out.println("=====>"+redisIp);
-        System.out.println("=====>"+mysqlip);*/
         initServerManager();
     }
 

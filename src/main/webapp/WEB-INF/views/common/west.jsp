@@ -4,9 +4,10 @@
 <%@ page import="com.lgame.model.User" %>
 <div data-options="region:'west',split:true" title="管理菜单" style="width:150px;padding:0px;">
 			<div id="menu" class="easyui-accordion" data-options="fit:true,border:false">
-
+				<%--<div title="游戏数据管理" id="staticDb" style="padding:0px;overflow: show">
+				</div>--%>
 				<%
-					User user = (User) request.getSession().getAttribute("user");
+					User user = (User) request.getSession().getAttribute("cur_user");
 					List<UrlMenu> urlMenus = ServerCache.getInstance().getMainMenus();
 					for(UrlMenu urlMenu:urlMenus){
 						if(user.hasUrl(urlMenu.getUrl())){
