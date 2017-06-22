@@ -28,7 +28,7 @@ public class BaseDao {
 	/**
 	 * 根据存储过程或者sql获得表结构信息
 	 * @param jdbcTemplate
-	 * @param storedProcedure存储过程(有参数用“？”号)或者sql
+	 * @param storedProcedure 存储过程(有参数用“？”号)或者sql
 	 * @param str参数
 	 * @return
 	 */
@@ -185,6 +185,30 @@ public class BaseDao {
 		});
 	}
 
+	public boolean insertNoReturn(JdbcTemplate jdbcTemplate,final String storedProcedure,final Object... obj){
+		return jdbcTemplate.execute(storedProcedure, new CallableStatementCallback<Boolean>() {
+			@Override
+			public Boolean doInCallableStatement(CallableStatement cs) {
+				try {
+					if(obj.length > 0){
+						for(int i = 0; i < obj.length;i++){
+							if(obj[i] == null){
+								cs.setString(i+1,null);
+							}else{
+								cs.setObject(i+1, obj[i]);
+							}
+						}
+					}
+
+					cs.execute();
+					return true;
+				} catch (Exception e) {
+					logger.error(storedProcedure+":",e);
+				}
+				return false;
+			}
+		});
+	}
 
 	/**
 	 * 根据条件返回查询结果集合
@@ -336,12 +360,12 @@ public class BaseDao {
 	 * 通用(返回对象)分页排序（不用对page等数据处理） total-总数量,rows当前页数据
 	 * @param jdbcTemplate
 	 * @param <T>
-	 * @param columMap当前查询的字段键值对集合，类属性-对应数据库字段名
-	 * @param tableName表名
-	 * @param page当前页码
-	 * @param pagesize每页记录数当小于0时表示不分页
-	 * @param sqlWhere查询条件 如" id > 20"
-	 * @param order排序 如: "id desc"
+	 * @param columMap 当前查询的字段键值对集合，类属性-对应数据库字段名
+	 * @param tableName 表名
+	 * @param page 当前页码
+	 * @param pagesize 每页记录数当小于0时表示不分页
+	 * @param sqlWhere 查询条件 如" id > 20"
+	 * @param order 排序 如: "id desc"
 	 * @return
 	 */
 	public  <T> Map<String, Object>  getPageResultToObject(JdbcTemplate jdbcTemplate,final Class<T> cls,final Map<String,String> columMap ,final String tableName,final int page, final int pagesize,final String sqlWhere,final String order) {
