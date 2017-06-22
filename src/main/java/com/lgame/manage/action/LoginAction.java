@@ -6,6 +6,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.lgame.manage.service.LoginService;
+import com.lgame.manage.service.UserService;
 import com.lgame.model.User;
 import com.lgame.util.comm.StringTool;
 import com.lgame.utils.AppException;
@@ -20,7 +21,8 @@ import com.lgame.utils.StringUtil;
 public class LoginAction {
 	@Autowired
 	private LoginService loginService;
-
+	@Autowired
+	private UserService userService;
 	/**
 	 * 登陆后台处理
 	 * @param user
@@ -37,7 +39,7 @@ public class LoginAction {
 		try {
 			user = loginService.login(user);
 			if(user != null){
-				session.setAttribute("cur_user", user);
+				loginSuc(user,request,session);
 				return "redirect:main";
 			}else{
 				session.setAttribute("msg","用户名不存在或者密码错误");
@@ -46,6 +48,10 @@ public class LoginAction {
 			session.setAttribute("msg",e.getMessage());
 		}
 		return "redirect:login";
+	}
+
+	private void loginSuc(User user,HttpServletRequest request, HttpSession session){
+		session.setAttribute("cur_user", user);
 	}
 	/**
 	 * 跳转主页

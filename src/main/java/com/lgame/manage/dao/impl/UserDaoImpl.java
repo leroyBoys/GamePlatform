@@ -102,17 +102,21 @@ public class UserDaoImpl extends BaseDao implements UserDao{
     }
 
     @Override
-    public Set<Integer> getUrlsByGroup(int group) {
+    public List<GroupLimit> getGroupLimits() {
         try {
-            return jdbcTemplate_plat.execute("SELECT url_id FROM `group_limit` WHERE group_id =  "+group, new PreparedStatementCallback<Set<Integer>>() {
+            return jdbcTemplate_plat.execute("SELECT * FROM `group_limit` ", new PreparedStatementCallback<List<GroupLimit>>() {
                 @Override
-                public Set<Integer> doInPreparedStatement(PreparedStatement cs) throws SQLException, DataAccessException {
+                public List<GroupLimit> doInPreparedStatement(PreparedStatement cs) throws SQLException, DataAccessException {
                     ResultSet rs = cs.executeQuery();
-                    Set<Integer> urlIds = new HashSet<>();
+                    List<GroupLimit> groupLimits = new LinkedList<>();
                     while (rs.next()){
-                        urlIds.add(rs.getInt("url_id"));
+                        try {
+                            groupLimits.add(GroupLimit.instance.create(rs));
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
-                    return urlIds;
+                    return groupLimits;
                 }
             });
         } catch (Exception ex) {

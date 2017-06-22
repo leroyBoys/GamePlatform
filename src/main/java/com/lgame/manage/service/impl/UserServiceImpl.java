@@ -48,8 +48,8 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
-    public Set<Integer> getUrlsByGroup(int group) {
-        return userDao.getUrlsByGroup(group);
+    public List<GroupLimit> getGroupLimits() {
+        return userDao.getGroupLimits();
     }
 
     @Override

@@ -22,7 +22,7 @@ public interface UserService {
 
     public int insertIntoUrlMenu(UrlMenu urlMenu);
 
-    public Set<Integer> getUrlsByGroup(int group);
+    public List<GroupLimit> getGroupLimits();
 
     public boolean insertIntoGroupLimit(GroupLimit limit);
 

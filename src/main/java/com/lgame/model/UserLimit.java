@@ -7,6 +7,7 @@ import java.sql.ResultSet;
 
 public class UserLimit extends DbFactory implements Serializable {
     public static UserLimit instance;
+    private int id;
     private int uid;
 	private int urlId;
 	private ExtraType extraType;
@@ -16,6 +17,7 @@ public class UserLimit extends DbFactory implements Serializable {
 		UserLimit user = createNew();
 		user.setUid(rs.getInt("uid"));
 		user.setUrlId(rs.getInt("url_id"));
+		user.setId(rs.getInt("id"));
 		user.setExtraType(ExtraType.valueOf(rs.getString("extra_type")));
 		return user;
 	}
@@ -38,6 +40,14 @@ public class UserLimit extends DbFactory implements Serializable {
 
 	public ExtraType getExtraType() {
 		return extraType;
+	}
+
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void setExtraType(ExtraType extraType) {

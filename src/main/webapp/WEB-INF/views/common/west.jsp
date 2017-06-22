@@ -1,6 +1,29 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+<%@ page import="com.lgame.manage.cache.ServerCache" %>
+<%@ page import="com.lgame.model.UrlMenu" %>
+<%@ page import="com.lgame.model.User" %>
 <div data-options="region:'west',split:true" title="管理菜单" style="width:150px;padding:0px;">
 			<div id="menu" class="easyui-accordion" data-options="fit:true,border:false">
+
+				<%
+					User user = (User) request.getSession().getAttribute("user");
+					List<UrlMenu> urlMenus = ServerCache.getInstance().getMainMenus();
+					for(UrlMenu urlMenu:urlMenus){
+						if(user.hasUrl(urlMenu.getUrl())){
+							%>
+							<div title="<%= urlMenu.getUrlName()%>" style="padding:0px;overflow:show">
+								<%
+									for(UrlMenu child:urlMenu.getMenus()){
+										%>
+											<a class="staticDb" title="<%= child.getUrlName()%>" rel="<%= child.getUrlName()%>" url="<%= child.getUrl()%>"><%= child.getUrlName()%></a>
+										<%
+									}
+								%>
+							</div>
+							<%
+						}
+					}
+				%>
 				<%--<div title="游戏数据管理" id="staticDb" style="padding:0px;overflow: show">
 				</div>
 				<div title="用户信息管理"  id="dynamicDb" style="padding:0px;overflow:show">

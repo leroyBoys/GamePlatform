@@ -31,6 +31,11 @@ public class CheckUserFilter  implements Filter {
         LOGIN_URL = filterConfig.getServletContext().getContextPath()+LOGIN_URL;
     }
 
+    private void initCommonMenu(){
+        commonMenu.add(LOGIN_URL);
+
+    }
+
     public void doFilter(ServletRequest req, ServletResponse resp,FilterChain chain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) req;
         HttpServletResponse response = (HttpServletResponse) resp;
