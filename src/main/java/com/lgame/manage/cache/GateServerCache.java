@@ -26,20 +26,14 @@ public class GateServerCache {
     private String mysqlip;
 
     public void start() {
-        System.out.println("=====>"+redisIp);
-        System.out.println("=====>"+mysqlip);
-      //  initServerManager();
+      /*  System.out.println("=====>"+redisIp);
+        System.out.println("=====>"+mysqlip);*/
+        initServerManager();
     }
 
     private void initServerManager(){
         List<ServerConnection> servers = serverService.getGateServers();
         ServerManager.getIntance().init(servers);
-
-        DB.UK.Builder uk = DB.UK.newBuilder();
-        uk.setIpPort("192.168.1.1:80");
-        uk.setUid(12);
-        uk.setKey("sds");
-        userRedis.save(uk.build());
     }
 
     public void destroy() {
