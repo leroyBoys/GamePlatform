@@ -1,24 +1,23 @@
 package com.lgame.manage.action;
 
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
 import com.lgame.manage.service.LoginService;
 import com.lgame.manage.service.UserService;
 import com.lgame.model.User;
-import com.lgame.util.comm.StringTool;
 import com.lgame.utils.AppException;
+import com.lgame.utils.StringUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-import com.lgame.utils.StringUtil;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 @Controller
-public class LoginAction {
+@RequestMapping(value={"/server"})
+public class ServerAction {
 	@Autowired
 	private LoginService loginService;
 	@Autowired
@@ -39,7 +38,6 @@ public class LoginAction {
 		try {
 			user = loginService.login(user);
 			if(user != null){
-				loginSuc(user,request,session);
 				return "redirect:main";
 			}else{
 				session.setAttribute("msg","用户名不存在或者密码错误");
@@ -50,17 +48,13 @@ public class LoginAction {
 		return "redirect:login";
 	}
 
-	private void loginSuc(User user,HttpServletRequest request, HttpSession session){
-		session.setAttribute("cur_user", user);
-	}
-
 	/**
 	 * 跳转主页
 	 * @param request
 	 * @param response
 	 * @return
 	 */
-	@RequestMapping(value={"/main"},method=RequestMethod.GET)
+	@RequestMapping(value={"/menus"},method=RequestMethod.GET)
 	public String toMain(HttpServletRequest request, HttpServletResponse response){
 		return "main";
 	}
